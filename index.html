@@ -1,137 +1,65 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Question Club</title>
+</head>
+<body>
 
-header {
-  background: #000000;
-  color: white;
-  padding: 15px 30px;
-  width: 100vw; /* força 100% da largura da tela */
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  <header>
+    <!-- Esquerda: botão três pontinhos -->
+    <div class="header-left">
+      <button onclick="alert('Abrir menu lateral')">&#8942;</button>
+    </div>
 
-header .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
-}
+    <!-- Centro: logo -->
+    <div class="logo">
+      <img src="img.png" alt="Question Club">
+    </div>
 
-.logo img {
-  height: 50px;
-  max-width: 100%;
-  object-fit: contain;
-}
+    <!-- Direita: ícones login e carrinho -->
+    <div class="header-right">
+      <a href="login.html">
+        <img src="747376.png" alt="Login"  >
+        Login
+      </a>
+      <a href="carrinho.html">
+        <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Carrinho">
+      </a>
+    </div>
+  </header>
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  padding: 30px;
-}
+  <main>
+    <section class="product-grid">
 
-.product {
-  background: #fff;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  text-align: center;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s ease;
-}
+      <a href="pai.html" class="product">
+        <img src="https://cdn.awsli.com.br/500x500/1559/1559043/produto/230250461/whatsapp-image-2023-08-19-at-15-27-22-74hjqtfgb4.jpeg" alt="kit 15 panos de prato">
+        <h3>kit 15 panos de prato</h3>
+        <p>R$140,00</p>
+      </a>
 
-.product:hover {
-  transform: scale(1.02);
-}
+      <a href="pai.html" class="product">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_620393-MLA80968377169_112024-O.webp" alt="kit 5 cobre tudo">
+        <h3>kit 5 cobre tudo</h3>
+        <p>R$90,00</p>
+      </a>
 
-.product img {
-  width: 100%;
-  max-height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-}
+      <a href="pai.html" class="product">
+        <img src="https://acdn-us.mitiendanube.com/stores/004/832/847/products/863470935f07c4afaa00fb67c567d49e-44d65866173e3a34f517207070125320-1024-1024.jpg" alt="kit 6 panos de prato">
+        <h3>kit 6 panos de prato</h3>
+        <p>R$40,00</p>
+      </a>
 
-.product h3 {
-  font-size: 16px;
-  margin: 10px 0 5px;
-}
+      <a href="pai.html" class="product">
+        <img src="https://a-static.mlcdn.com.br/1500x1500/pano-de-prato-cozinha-kit-6-unidades-algodao-decorado-grande-ss-casa/spreshops/panpragest-6un/fab2b1db6773a81b8b2bc8ddff8eef7b.jpeg" alt="kit 6 cobre tudo">
+        <h3>kit 6 cobre tudo</h3>
+        <p>R$50,00</p>
+      </a>
 
-.product p {
-  color: #333;
-  font-weight: bold;
-  margin: 5px 0;
-}
+    </section>
+  </main>
 
-a {
-  text-decoration: none;
-}
-
-/* ✅ MOSTRAR 2 PRODUTOS POR LINHA NO CELULAR */
-@media (max-width: 600px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 15px;
-    gap: 15px;
-  }
-
-  .product h3,
-  .product p {
-    font-size: 14px;
-  }
-}
-
-    .logo img {
-      height: 50px;
-      width: auto;
-    }
-    .header-left button {
-      background: none;
-      border: none;
-      color: #f4f4f4;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    .header-right {
-  display: flex;
-  align-items: center;
-  gap: 50px; /* aumentei de 15px para 30px */
-}
-    .header-right a {
-      text-decoration: none;
-      color: #ffffff;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .header-right img {
-  width: 22px;
-  height: 22px;
-  filter: invert(1);
-}
-
-    
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-    .product {
-      text-align: center;
-      text-decoration: none;
-      color: #000;
-    }
-    .product img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;}
-
-    .header-right{
-      color: white;
-    }
+</body>
+</html>
