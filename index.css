@@ -135,3 +135,25 @@ a {
     .header-right{
       color: white;
     }
+
+
+
+
+@media (max-width: 600px) {
+  header {
+    justify-content: center;
+    position: relative;
+  }
+  .header-left,
+  .header-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .header-left {
+    left: 10px;
+  }
+  .header-right {
+    right: 10px;
+  }
+}
