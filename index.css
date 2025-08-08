@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+header {
+  background: #000000;
+  color: white;
+  padding: 15px 30px;
+  width: 100vw; /* força 100% da largura da tela */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.logo img {
+  height: 50px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.product {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.product:hover {
+  transform: scale(1.02);
+}
+
+.product img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+}
+
+.product p {
+  color: #333;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ✅ MOSTRAR 2 PRODUTOS POR LINHA NO CELULAR */
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .product h3,
+  .product p {
+    font-size: 14px;
+  }
+}
