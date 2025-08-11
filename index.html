@@ -8,29 +8,32 @@
 </head>
 <body>
 
-  <!-- overlay (clicar fecha) -->
+  <!-- overlay -->
   <div id="overlay" onclick="closeMenu()" aria-hidden="true"></div>
 
   <!-- sidebar -->
   <nav id="sidebar" aria-hidden="true" aria-label="Menu lateral">
-    <button class="close-btn" onclick="closeMenu()" aria-label="Fechar menu">×</button>
+    <div class="sidebar-top">
+      <div class="sidebar-logo">
+        <img src="ims.png" alt="Question Club">
+      </div>
+      <button class="close-btn" onclick="closeMenu()" aria-label="Fechar menu">×</button>
+    </div>
     <ul>
-      <li><a href="index.html">Serviços</a></li>
+      <li><a href="index.html">$CLUB</a></li>
       <li><a href="carrinho.html">Produtos</a></li>
+      <li><a href="login.html">Serviços</a></li>
       <li><a href="login.html">Sobre Nós</a></li>
     </ul>
   </nav>
 
   <header>
     <div class="header-left">
-      <!-- id e aria --> 
       <button id="menuBtn" type="button" onclick="openMenu()" aria-haspopup="true" aria-controls="sidebar" aria-expanded="false">&#8942;</button>
     </div>
-
     <div class="logo">
       <img src="img.png" alt="Question Club">
     </div>
-
     <div class="header-right">
       <a href="carrinho.html">
         <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Carrinho">
@@ -49,19 +52,16 @@
         <h3>kit 15 panos de prato</h3>
         <p>R$140,00</p>
       </a>
-
       <a href="pai.html" class="product">
         <img src="https://http2.mlstatic.com/D_NQ_NP_620393-MLA80968377169_112024-O.webp" alt="kit 5 cobre tudo">
         <h3>kit 5 cobre tudo</h3>
         <p>R$90,00</p>
       </a>
-
       <a href="pai.html" class="product">
         <img src="https://acdn-us.mitiendanube.com/stores/004/832/847/products/863470935f07c4afaa00fb67c567d49e-44d65866173e3a34f517207070125320-1024-1024.jpg" alt="kit 6 panos de prato">
         <h3>kit 6 panos de prato</h3>
         <p>R$40,00</p>
       </a>
-
       <a href="pai.html" class="product">
         <img src="https://a-static.mlcdn.com.br/1500x1500/pano-de-prato-cozinha-kit-6-unidades-algodao-decorado-grande-ss-casa/spreshops/panpragest-6un/fab2b1db6773a81b8b2bc8ddff8eef7b.jpeg" alt="kit 6 cobre tudo">
         <h3>kit 6 cobre tudo</h3>
@@ -71,7 +71,6 @@
   </main>
 
   <script>
-    // elementos
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const menuBtn = document.getElementById('menuBtn');
@@ -82,9 +81,7 @@
       sidebar.setAttribute('aria-hidden', 'false');
       overlay.setAttribute('aria-hidden', 'false');
       menuBtn.setAttribute('aria-expanded', 'true');
-      // trava o scroll do body
       document.body.style.overflow = 'hidden';
-      // coloca foco no primeiro link (boa prática de acessibilidade)
       const firstLink = sidebar.querySelector('a');
       if (firstLink) firstLink.focus();
     }
@@ -95,29 +92,21 @@
       sidebar.setAttribute('aria-hidden', 'true');
       overlay.setAttribute('aria-hidden', 'true');
       menuBtn.setAttribute('aria-expanded', 'false');
-      // restaura scroll
       document.body.style.overflow = '';
-      // devolve foco para o botão de abrir
       menuBtn.focus();
     }
 
-    // ESC fecha o menu
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && sidebar.classList.contains('open')) {
         closeMenu();
       }
     });
 
-    // evitar que cliques dentro do sidebar fechem o menu (quando usar event delegation)
     sidebar.addEventListener('click', function (e) {
-      // se o clique for num link, fecha (comportamento comum)
       if (e.target.tagName.toLowerCase() === 'a') {
         closeMenu();
       }
     });
-
-    // Se quiser, descomente as duas linhas abaixo para fechar ao redimensionar a viewport:
-    // window.addEventListener('resize', () => { if (sidebar.classList.contains('open')) closeMenu(); });
   </script>
 </body>
 </html>
