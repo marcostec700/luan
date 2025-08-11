@@ -1,3 +1,4 @@
+/* ===== Base ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -5,25 +6,25 @@ body {
 }
 
 header {
-  background: #000000;
-  color: white;
+  background: #000;
+  color: #fff;
   padding: 10px 20px;
   display: flex;
-  justify-content: space-between; /* mantém esquerda, centro e direita */
-  align-items: center; /* alinha verticalmente */
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   box-sizing: border-box;
+  min-height: 56px;
+  position: relative; /* necessário para posicionamento absoluto dos lados no mobile */
 }
 
-.logo {
-  flex: 1; /* ocupa espaço e mantém a logo centralizada */
-  text-align: center;
-}
-
-.logo img {
-  height: 50px;
-  max-width: 100%;
-  object-fit: contain;
+/* Left / Right / Logo */
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
 }
 
 .header-left button {
@@ -34,28 +35,20 @@ header {
   cursor: pointer;
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  color: white;
+.logo {
+  flex: 1;
+  text-align: center;
+  z-index: 1;
 }
 
-.header-right a {
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+.logo img {
+  height: 50px;
+  max-width: 100%;
+  object-fit: contain;
+  display: inline-block;
 }
 
-.header-right img {
-  width: 22px;
-  height: 22px;
-  filter: invert(1);
-}
-
+/* Produtos (mantive suas regras anteriores limpando duplicações) */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -69,14 +62,11 @@ header {
   padding: 15px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   text-align: center;
-  text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease;
 }
 
-.product:hover {
-  transform: scale(1.02);
-}
+.product:hover { transform: scale(1.02); }
 
 .product img {
   max-width: 100%;
@@ -85,62 +75,38 @@ header {
   border-radius: 8px;
 }
 
-.product h3 {
-  font-size: 16px;
-  margin: 10px 0 5px;
-}
-
-.product p {
-  color: #333;
-  font-weight: bold;
-  margin: 5px 0;
-}
-
-/* ✅ Mostrar 2 produtos por linha no celular */
+/* ===== Mobile: centralizar logo corretamente ===== */
 @media (max-width: 600px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 15px;
-    gap: 15px;
-  }
+  /* reduz espaçamentos para mobile */
+  header { padding: 8px 12px; min-height: 56px; }
 
-  .product h3,
-  .product p {
-    font-size: 14px;
-  }
-
-  .header-right {
-    gap: 15px;
-  }
-}
-
-  @media (max-width: 600px) {
-  header {
-    position: relative;
-    height: 60px; /* altura fixa para alinhar */
-    display: block; /* remove o flex que empurra a logo */
-  }
-
+  /* posicionar os elementos laterais fora do fluxo, nas bordas */
   .header-left,
   .header-right {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
   }
 
-  .header-left {
-    left: 10px;
-  }
+  .header-left { left: 10px; }
+  .header-right { right: 10px; }
 
-  .header-right {
-    right: 10px;
-  }
-
+  /* logo centralizada absoluta */
   .logo {
     position: absolute;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* centraliza horizontal e vertical */
+    top: 50%;
+    transform: translate(-50%, -50%);
+    flex: none;               /* evita expansão */
+    max-width: calc(100% - 120px); /* garante que não cubra os ícones nas extremidades */
     text-align: center;
+    z-index: 1;
   }
+
+  .logo img { height: 40px; }
+
+  /* reduz gap dos ícones no mobile */
+  .header-right { gap: 12px; }
 }
