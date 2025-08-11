@@ -114,12 +114,11 @@ header {
   }
 }
 
-
-
-@media (max-width: 600px) {
+  @media (max-width: 600px) {
   header {
-    justify-content: center;
     position: relative;
+    height: 60px; /* altura fixa para alinhar */
+    display: block; /* remove o flex que empurra a logo */
   }
 
   .header-left,
@@ -138,8 +137,10 @@ header {
   }
 
   .logo {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centraliza horizontal e vertical */
     text-align: center;
-    flex: none; /* remove o flex que empurra no desktop */
   }
 }
