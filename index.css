@@ -18,17 +18,19 @@ header {
   position: relative;
 }
 
+/* Botão de menu (três pontinhos) */
 .header-left button {
   background: none;
   border: none;
   color: #f4f4f4;
-  font-size: 24px;
+  font-size: 20px; /* tamanho do ícone */
   cursor: pointer;
-  height: 40px;
+  height: 40px; /* área clicável igual para todos */
   width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
 }
 
 .logo {
@@ -48,20 +50,26 @@ header {
 }
 
 .header-right a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 14px;
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 5px; /* espaço entre ícone e texto */
+  text-decoration: none; /* remove sublinhado */
+  color: #fff; /* deixa branco */
+  font-size: 14px;
+}
+
+.header-right a:hover {
+  color: #ccc; /* efeito hover */
 }
 
 .header-right img {
-  width: 40px; /* igual à logo em altura */
-  height: 40px;
-  object-fit: contain;
+  width: 20px;  /* tamanho real do ícone */
+  height: 20px;
   filter: invert(1);
 }
+
 
 /* GRID PRODUTOS */
 .product-grid {
