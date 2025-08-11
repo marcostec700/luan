@@ -190,3 +190,15 @@
       outline: none;
       text-decoration: none;
     }
+
+
+
+/* Remove o flash azul no clique em dispositivos móveis */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove cor de fundo do foco no mobile */
+*:focus {
+  outline: none;
+}
