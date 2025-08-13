@@ -5,6 +5,250 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Question Club</title>
   <link rel="stylesheet" href="index.css">
+  <style>
+    :root { --sidebar-width: 260px; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      background: #000;
+      color: white;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .header-left button {
+      background: none;
+      border: none;
+      color: #f4f4f4;
+      font-size: 20px;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .logo { text-align: center; }
+    .logo img { height: 40px; width: auto; display: block; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .header-right a {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .header-right a:hover { color: #ccc; }
+
+    .header-right img {
+      width: 20px;
+      height: 20px;
+      filter: invert(1);
+    }
+
+    /* ---------- PRODUCT GRID ---------- */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .product {
+      background: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease;
+    }
+
+    .product:hover { transform: scale(1.02); }
+
+    .product img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product h3 { font-size: 16px; margin: 10px 0 5px; }
+    .product p { color: #333; font-weight: bold; margin: 5px 0; }
+
+    @media (max-width: 600px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px; gap: 15px; }
+      header { justify-content: center; }
+      .header-left { position: absolute; left: 10px; }
+      .header-right { position: absolute; right: 10px; }
+      .logo img { height: 40px; }
+    }
+
+    /* ---------- OVERLAY ---------- */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      z-index: 998;
+    }
+    #overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      max-width: 85%;
+      height: 100%;
+      background: #111;
+      color: white;
+      transform: translateX(-110%);
+      transition: transform 0.26s cubic-bezier(.2,.8,.2,1);
+      z-index: 999;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    }
+    #sidebar.open { transform: translateX(0); }
+
+    .sidebar-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgb(255, 255, 255);
+      height: 59px;
+      overflow: hidden;
+      margin-left: -35px;
+    }
+
+    .sidebar-logo img {
+      height: 90px;
+      width: auto;
+    }
+
+    #sidebar .close-btn {
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      text-decoration: none;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #sidebar ul li {
+      border-bottom: 1px solid rgb(255, 255, 255);
+    }
+
+    #sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      font-size: 16px;
+      padding: 14px 20px;
+    }
+
+    #sidebar ul li a:hover {
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Dropdown com animação */
+    .submenu {
+      max-height: 0;
+      overflow: hidden;
+      background: #1a1a1a;
+      padding-left: 15px;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .submenu li {
+      border-bottom: none;
+    }
+
+    .menu-dropdown {
+      position: relative;
+    }
+
+    .menu-dropdown .dropdown-titulo {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      font-size: 16px;
+      color: white;
+    }
+
+    .menu-dropdown .dropdown-titulo:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .menu-dropdown .seta {
+      transition: transform 0.3s ease;
+    }
+
+    .menu-dropdown.ativo .seta {
+      transform: rotate(90deg);
+    }
+
+    .submenu li a.ativo {
+      background: rgba(255,255,255,0.1);
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    /* Remove foco padrão */
+    button:focus, a:focus {
+      outline: none;
+      text-decoration: none;
+    }
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+    *:focus {
+      outline: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -20,10 +264,35 @@
       <button class="close-btn" onclick="closeMenu()" aria-label="Fechar menu">×</button>
     </div>
     <ul>
-      <li><a href="index.html">$CLUB</a></li>
-      <li><a href="carrinho.html">Produtos</a></li>
-      <li><a href="login.html">Serviços</a></li>
-      <li><a href="login.html">Sobre Nós</a></li>
+      <li><a href="/menu/0-club.html">$CLUB</a></li>
+
+      <!-- Produtos -->
+      <li class="menu-dropdown">
+        <span class="dropdown-titulo">
+          Produtos
+          <span class="seta">▶</span>
+        </span>
+        <ul class="submenu">
+          <li><a href="/menu/1-t-shirt.html">T-shirt</a></li>
+          <li><a href="/menu/2-jaquetas.html">Jaquetas & Sapatos</a></li>
+          <li><a href="/menu/3-acessorios.html">Acessórios</a></li>
+        </ul>
+      </li>
+
+      <!-- Serviços -->
+      <li class="menu-dropdown">
+        <span class="dropdown-titulo">
+          Serviços
+          <span class="seta">▶</span>
+        </span>
+        <ul class="submenu">
+          <li><a href="/menu/4-produção.html">Produção Musical</a></li>
+          <li><a href="/menu/5-consultoria.html">Consultoria Criativa</a></li>
+          <li><a href="/menu/6-musicas.html">Músicas Sob Encomenda</a></li>
+        </ul>
+      </li>
+
+      <li><a href="/menu/7-sobre.html">Sobre Nós</a></li>
     </ul>
   </nav>
 
@@ -46,28 +315,7 @@
   </header>
 
   <main>
-    <section class="product-grid">
-      <a href="pai.html" class="product">
-        <img src="https://cdn.awsli.com.br/500x500/1559/1559043/produto/230250461/whatsapp-image-2023-08-19-at-15-27-22-74hjqtfgb4.jpeg" alt="kit 15 panos de prato">
-        <h3>kit 15 panos de prato</h3>
-        <p>R$140,00</p>
-      </a>
-      <a href="pai.html" class="product">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_620393-MLA80968377169_112024-O.webp" alt="kit 5 cobre tudo">
-        <h3>kit 5 cobre tudo</h3>
-        <p>R$90,00</p>
-      </a>
-      <a href="pai.html" class="product">
-        <img src="https://acdn-us.mitiendanube.com/stores/004/832/847/products/863470935f07c4afaa00fb67c567d49e-44d65866173e3a34f517207070125320-1024-1024.jpg" alt="kit 6 panos de prato">
-        <h3>kit 6 panos de prato</h3>
-        <p>R$40,00</p>
-      </a>
-      <a href="pai.html" class="product">
-        <img src="https://a-static.mlcdn.com.br/1500x1500/pano-de-prato-cozinha-kit-6-unidades-algodao-decorado-grande-ss-casa/spreshops/panpragest-6un/fab2b1db6773a81b8b2bc8ddff8eef7b.jpeg" alt="kit 6 cobre tudo">
-        <h3>kit 6 cobre tudo</h3>
-        <p>R$50,00</p>
-      </a>
-    </section>
+    <section class="product-grid"></section>
   </main>
 
   <script>
@@ -106,6 +354,37 @@
       if (e.target.tagName.toLowerCase() === 'a') {
         closeMenu();
       }
+    });
+
+    // Dropdown animado
+    document.querySelectorAll('.menu-dropdown').forEach(menu => {
+      const titulo = menu.querySelector('.dropdown-titulo');
+      const submenu = menu.querySelector('.submenu');
+
+      titulo.addEventListener('click', () => {
+        const aberto = menu.classList.toggle('ativo');
+        if (aberto) {
+          submenu.style.maxHeight = submenu.scrollHeight + "px";
+          submenu.style.paddingTop = "5px";
+          submenu.style.paddingBottom = "5px";
+        } else {
+          submenu.style.maxHeight = null;
+          submenu.style.paddingTop = "0";
+          submenu.style.paddingBottom = "0";
+        }
+      });
+
+      // Abre automaticamente se for a página atual
+      const paginaAtual = window.location.pathname.split('/').pop();
+      submenu.querySelectorAll('a').forEach(link => {
+        if (link.getAttribute('href') === paginaAtual) {
+          link.classList.add('ativo');
+          menu.classList.add('ativo');
+          submenu.style.maxHeight = submenu.scrollHeight + "px";
+          submenu.style.paddingTop = "5px";
+          submenu.style.paddingBottom = "5px";
+        }
+      });
     });
   </script>
 </body>
