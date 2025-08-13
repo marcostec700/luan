@@ -1,5 +1,4 @@
- /* ---------- BASE ---------- */
-    :root { --sidebar-width: 260px; }
+:root { --sidebar-width: 260px; }
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -136,21 +135,21 @@
     }
     #sidebar.open { transform: translateX(0); }
 
-.sidebar-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px;
-  border-bottom: 1px solid rgb(255, 255, 255);
-  height: 59px; /* altura fixa igual à original */
-  overflow: hidden; /* não deixa aumentar a altura */
-  margin-left: -35px; /* empurra para a esquerda */
-}
+    .sidebar-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgb(255, 255, 255);
+      height: 59px;
+      overflow: hidden;
+      margin-left: -35px;
+    }
 
-.sidebar-logo img {
-  height: 90px; /* aumenta a logo */
-  width: auto;
-}
+    .sidebar-logo img {
+      height: 90px;
+      width: auto;
+    }
 
     #sidebar .close-btn {
       font-size: 28px;
@@ -170,7 +169,6 @@
     }
 
     #sidebar ul li {
-      padding: 14px 20px;
       border-bottom: 1px solid rgb(255, 255, 255);
     }
 
@@ -179,10 +177,56 @@
       text-decoration: none;
       display: block;
       font-size: 16px;
+      padding: 14px 20px;
     }
 
     #sidebar ul li a:hover {
       background: rgba(255,255,255,0.03);
+    }
+
+    /* Dropdown com animação */
+    .submenu {
+      max-height: 0;
+      overflow: hidden;
+      background: #1a1a1a;
+      padding-left: 15px;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .submenu li {
+      border-bottom: none;
+    }
+
+    .menu-dropdown {
+      position: relative;
+    }
+
+    .menu-dropdown .dropdown-titulo {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      font-size: 16px;
+      color: white;
+    }
+
+    .menu-dropdown .dropdown-titulo:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .menu-dropdown .seta {
+      transition: transform 0.3s ease;
+    }
+
+    .menu-dropdown.ativo .seta {
+      transform: rotate(90deg);
+    }
+
+    .submenu li a.ativo {
+      background: rgba(255,255,255,0.1);
+      font-weight: bold;
+      border-radius: 4px;
     }
 
     /* Remove foco padrão */
@@ -190,15 +234,9 @@
       outline: none;
       text-decoration: none;
     }
-
-
-
-/* Remove o flash azul no clique em dispositivos móveis */
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Remove cor de fundo do foco no mobile */
-*:focus {
-  outline: none;
-}
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+    *:focus {
+      outline: none;
+    }
